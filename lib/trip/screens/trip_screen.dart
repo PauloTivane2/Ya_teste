@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/constants/trip_status.dart';
 import '../../core/theme/app_colors.dart';
 import '../models/trip.dart';
@@ -62,15 +63,15 @@ class _TripScreenState extends State<TripScreen> {
   IconData _getStatusIcon(TripStatus status) {
     switch (status) {
       case TripStatus.searching:
-        return Icons.search_rounded;
+        return LucideIcons.search;
       case TripStatus.driverAssigned:
-        return Icons.directions_car_rounded;
+        return LucideIcons.car;
       case TripStatus.inProgress:
-        return Icons.navigation_rounded;
+        return LucideIcons.navigation;
       case TripStatus.completed:
-        return Icons.check_circle_rounded;
+        return LucideIcons.circleCheck;
       case TripStatus.cancelled:
-        return Icons.cancel_rounded;
+        return LucideIcons.circleX;
     }
   }
 
@@ -83,7 +84,7 @@ class _TripScreenState extends State<TripScreen> {
         actions: [
           IconButton(
             tooltip: 'Reiniciar dados da viagem',
-            icon: const Icon(Icons.refresh_rounded),
+            icon: const Icon(LucideIcons.rotateCcw),
             onPressed: () {
               setState(() {
                 _trip = Trip.mockInitial();
@@ -176,10 +177,10 @@ class _TripScreenState extends State<TripScreen> {
 
           if (isCancelled && isCurrent) {
             dotColor = AppColors.textPrimary;
-            icon = const Icon(Icons.close, size: 14, color: AppColors.bg);
+            icon = const Icon(LucideIcons.x, size: 14, color: AppColors.bg);
           } else if (isCompleted) {
             dotColor = AppColors.accentTeal;
-            icon = const Icon(Icons.check, size: 14, color: AppColors.bg);
+            icon = const Icon(LucideIcons.check, size: 14, color: AppColors.bg);
           } else if (isCurrent) {
             dotColor = AppColors.getStatusColor(stepStatus);
             icon = Container(

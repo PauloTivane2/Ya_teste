@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/constants/trip_status.dart';
 import '../../core/theme/app_colors.dart';
 
@@ -24,14 +25,14 @@ class StatusButton extends StatelessWidget {
     IconData getActionIcon() {
       switch (currentStatus) {
         case TripStatus.searching:
-          return Icons.person_pin_circle_outlined;
+          return LucideIcons.userCheck;
         case TripStatus.driverAssigned:
-          return Icons.directions_car_filled_outlined;
+          return LucideIcons.car;
         case TripStatus.inProgress:
-          return Icons.check_circle_outline;
+          return LucideIcons.circleCheck;
         case TripStatus.completed:
         case TripStatus.cancelled:
-          return Icons.refresh_rounded;
+          return LucideIcons.rotateCcw;
       }
     }
 
@@ -98,7 +99,7 @@ class StatusButton extends StatelessWidget {
             onPressed: () {
               onStatusChanged(TripStatus.cancelled);
             },
-            icon: const Icon(Icons.close_rounded, size: 18, color: AppColors.textPrimary),
+            icon: const Icon(LucideIcons.x, size: 18, color: AppColors.textPrimary),
             label: const Text(
               'Cancelar Viagem',
               style: TextStyle(
@@ -121,7 +122,7 @@ class StatusButton extends StatelessWidget {
             onPressed: () {
               onStatusChanged(TripStatus.searching);
             },
-            icon: const Icon(Icons.restart_alt_rounded, size: 18),
+            icon: const Icon(LucideIcons.rotateCcw, size: 18),
             label: const Text('Tentar Novamente'),
             style: TextButton.styleFrom(
               foregroundColor: AppColors.accentTeal,

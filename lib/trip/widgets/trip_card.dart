@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/theme/app_colors.dart';
 import '../models/trip.dart';
 
@@ -53,7 +54,7 @@ class TripCard extends StatelessWidget {
                           border: Border.all(color: AppColors.border, width: 1),
                         ),
                         child: const Icon(
-                          Icons.local_taxi_rounded,
+                          LucideIcons.carTaxiFront,
                           size: 18,
                           color: AppColors.accentTeal,
                         ),
@@ -234,17 +235,17 @@ class TripCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _InfoItem(
-                    icon: Icons.straighten_rounded,
+                    icon: LucideIcons.ruler,
                     label: 'Distância',
                     value: trip.distance,
                   ),
                   _InfoItem(
-                    icon: Icons.schedule_rounded,
+                    icon: LucideIcons.clock,
                     label: 'Tempo Est.',
                     value: trip.estimatedTime,
                   ),
                   _InfoItem(
-                    icon: Icons.payments_outlined,
+                    icon: LucideIcons.banknote,
                     label: 'Tarifa Est.',
                     value: '${trip.fare.toStringAsFixed(0)} Kz',
                   ),
@@ -259,7 +260,7 @@ class TripCard extends StatelessWidget {
                 children: [
                   // Passageiro
                   _DetailRow(
-                    avatarIcon: Icons.person_rounded,
+                    avatarIcon: LucideIcons.user,
                     avatarBgColor: AppColors.secondary,
                     avatarFgColor: AppColors.textPrimary,
                     title: 'Passageiro',
@@ -273,7 +274,7 @@ class TripCard extends StatelessWidget {
 
                   // Motorista e Veículo
                   _DetailRow(
-                    avatarIcon: Icons.directions_car_rounded,
+                    avatarIcon: LucideIcons.car,
                     avatarBgColor: AppColors.secondary,
                     avatarFgColor: AppColors.accentTeal,
                     title: 'Motorista & Veículo',
