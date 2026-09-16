@@ -51,14 +51,14 @@ enum TripStatus {
   String get nextActionLabel {
     switch (this) {
       case TripStatus.searching:
-        return 'Encontrar Motorista';
+        return 'Confirmar motorista encontrado';
       case TripStatus.driverAssigned:
-        return 'Iniciar Viagem';
+        return 'Iniciar viagem';
       case TripStatus.inProgress:
-        return 'Concluir Viagem';
+        return 'Concluir viagem';
       case TripStatus.completed:
       case TripStatus.cancelled:
-        return 'Reiniciar Simulação';
+        return 'Reiniciar simulação';
     }
   }
 

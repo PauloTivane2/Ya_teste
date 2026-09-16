@@ -42,45 +42,72 @@ class AppColors {
   static const Color tealTint = Color(0x26389C9A);      // #389C9A com 15% opacidade
   static const Color yellowTint = Color(0x3DFEDB71);    // #FEDB71 com 24% opacidade
 
-  /// Cor principal associada a cada estado da viagem (usa apenas Accent Teal, Accent Amarelo ou Text)
+  // Cores Semânticas de Estado da Viagem (Feedback visual imediato)
+  static const Color statusSearching = Color(0xFFF59E0B);    // Laranja / Âmbar
+  static const Color statusSearchingBg = Color(0xFFFFFBEB);  // Laranja suave
+  static const Color statusSearchingText = Color(0xFFB45309);
+
+  static const Color statusDriverAssigned = Color(0xFF0284C7); // Azul celeste
+  static const Color statusDriverAssignedBg = Color(0xFFF0F9FF);
+  static const Color statusDriverAssignedText = Color(0xFF0369A1);
+
+  static const Color statusInProgress = Color(0xFF2563EB);    // Azul vibrante
+  static const Color statusInProgressBg = Color(0xFFEFF6FF);  // Azul suave
+  static const Color statusInProgressText = Color(0xFF1D4ED8);
+
+  static const Color statusCompleted = Color(0xFF10B981);     // Verde esmeralda
+  static const Color statusCompletedBg = Color(0xFFECFDF5);   // Verde suave
+  static const Color statusCompletedText = Color(0xFF047857);
+
+  static const Color statusCancelled = Color(0xFFEF4444);     // Vermelho suave
+  static const Color statusCancelledBg = Color(0xFFFEF2F2);
+  static const Color statusCancelledText = Color(0xFFB91C1C);
+
+  /// Cor principal associada a cada estado da viagem
   static Color getStatusColor(TripStatus status) {
     switch (status) {
       case TripStatus.searching:
-        return accentYellow;
+        return statusSearching;
       case TripStatus.driverAssigned:
+        return statusDriverAssigned;
       case TripStatus.inProgress:
+        return statusInProgress;
       case TripStatus.completed:
-        return accentTeal;
+        return statusCompleted;
       case TripStatus.cancelled:
-        return textPrimary;
+        return statusCancelled;
     }
   }
 
-  /// Cor de texto para alto contraste com o status
+  /// Cor de texto para alto contraste com o badge do status
   static Color getStatusTextColor(TripStatus status) {
     switch (status) {
       case TripStatus.searching:
-        return textPrimary;
+        return statusSearchingText;
       case TripStatus.driverAssigned:
+        return statusDriverAssignedText;
       case TripStatus.inProgress:
+        return statusInProgressText;
       case TripStatus.completed:
-        return accentTeal;
+        return statusCompletedText;
       case TripStatus.cancelled:
-        return textPrimary;
+        return statusCancelledText;
     }
   }
 
-  /// Cor de fundo do badge ou banner para cada estado (usa apenas tints ou secondary)
+  /// Cor de fundo do badge ou card para cada estado
   static Color getStatusBgColor(TripStatus status) {
     switch (status) {
       case TripStatus.searching:
-        return yellowTint;
+        return statusSearchingBg;
       case TripStatus.driverAssigned:
+        return statusDriverAssignedBg;
       case TripStatus.inProgress:
+        return statusInProgressBg;
       case TripStatus.completed:
-        return tealTint;
+        return statusCompletedBg;
       case TripStatus.cancelled:
-        return secondary;
+        return statusCancelledBg;
     }
   }
 
@@ -88,13 +115,15 @@ class AppColors {
   static Color getStatusBorderColor(TripStatus status) {
     switch (status) {
       case TripStatus.searching:
-        return accentYellow;
+        return const Color(0xFFFDE68A);
       case TripStatus.driverAssigned:
+        return const Color(0xFFBAE6FD);
       case TripStatus.inProgress:
+        return const Color(0xFFBFDBFE);
       case TripStatus.completed:
-        return accentTeal;
+        return const Color(0xFFA7F3D0);
       case TripStatus.cancelled:
-        return border;
+        return const Color(0xFFFECACA);
     }
   }
 }

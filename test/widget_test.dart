@@ -6,8 +6,8 @@ void main() {
     await tester.pumpWidget(const YaTripApp());
 
     // Verifica se a tela principal e os dados da viagem carregaram
-    expect(find.text('Acompanhamento de Viagem'), findsOneWidget);
+    expect(find.text('Detalhes da Viagem'), findsOneWidget);
     expect(find.text('Carlos'), findsOneWidget);
-    expect(find.text('Encontrar Motorista'), findsOneWidget);
+    expect(find.text('Confirmar motorista encontrado'), findsOneWidget);
   });
 }
