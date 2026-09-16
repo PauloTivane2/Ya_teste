@@ -427,12 +427,17 @@ class TripDriverCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSearching = trip.status == TripStatus.searching;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.bg,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.border, width: 1.2),
+        border: Border.all(
+          color: isSearching ? const Color(0xFFFDE68A) : AppColors.border,
+          width: 1.2,
+        ),
         boxShadow: const [
           BoxShadow(
             color: AppColors.cardShadow,
@@ -442,83 +447,176 @@ class TripDriverCard extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.all(18),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: AppColors.secondary,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.border, width: 1),
-            ),
-            child: const Icon(
-              LucideIcons.car,
-              size: 24,
-              color: AppColors.accentTeal,
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: isSearching
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    const Text(
-                      'Motorista',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textMuted,
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: AppColors.statusSearchingBg,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: const Color(0xFFFDE68A), width: 1),
+                  ),
+                  child: const Center(
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.2,
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.statusSearching),
                       ),
                     ),
-                    const SizedBox(width: 6),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: AppColors.secondary,
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: AppColors.border, width: 1),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Motorista',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          SizedBox(width: 6),
+                          _SearchBadge(),
+                        ],
                       ),
-                      child: const Text(
-                        'Verificado',
+                      SizedBox(height: 3),
+                      Text(
+                        'A procurar motorista...',
                         style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.accentTeal,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.textPrimary,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  trip.driver,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
+                      SizedBox(height: 2),
+                      Text(
+                        'A ligar ao motorista mais próximo',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.textSecondary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  trip.vehicle,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textSecondary,
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: AppColors.secondary,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppColors.border, width: 1),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  child: const Icon(
+                    LucideIcons.car,
+                    size: 24,
+                    color: AppColors.accentTeal,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Text(
+                            'Motorista',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.secondary,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: AppColors.border, width: 1),
+                            ),
+                            child: const Text(
+                              'Verificado',
+                              style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.accentTeal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        trip.driver,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.textPrimary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        trip.vehicle,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textSecondary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+    );
+  }
+}
+
+class _SearchBadge extends StatelessWidget {
+  const _SearchBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: AppColors.statusSearchingBg,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFFFDE68A), width: 1),
+      ),
+      child: const Text(
+        'A procurar',
+        style: TextStyle(
+          fontSize: 9,
+          fontWeight: FontWeight.w700,
+          color: AppColors.statusSearchingText,
+        ),
       ),
     );
   }
