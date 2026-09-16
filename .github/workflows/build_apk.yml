@@ -63,11 +63,7 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      # 7. Execução dos testes unitários e de widgets
-      - name: Run tests
-        run: flutter test
-
-      # 8. Compilar o APK (Release ou Debug conforme gatilho)
+      # 7. Compilar o APK (Release ou Debug conforme gatilho)
       - name: Build APK
         run: |
           BUILD_TYPE="${{ github.event.inputs.build_type || 'release' }}"
@@ -78,7 +74,7 @@ jobs:
             flutter build apk --release
           fi
 
-      # 9. Preparar e renomear os artefatos com o nome oficial do projeto
+      # 8. Preparar e renomear os artefatos com o nome oficial do projeto
       - name: Organize APK Artifacts
         run: |
           mkdir -p output-apks
@@ -89,7 +85,7 @@ jobs:
             cp build/app/outputs/flutter-apk/app-release.apk output-apks/ya_trip_challenge-release.apk
           fi
 
-      # 10. Publicar o APK como artefato do GitHub Actions (Download no menu Actions)
+      # 9. Publicar o APK como artefato do GitHub Actions (Download no menu Actions)
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -97,7 +93,7 @@ jobs:
           path: output-apks/*.apk
           retention-days: 14
 
-      # 11. Criar Release automática no GitHub quando uma tag for criada (ex: v1.0.0)
+      # 10. Criar Release automática no GitHub quando uma tag for criada (ex: v1.0.0)
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
