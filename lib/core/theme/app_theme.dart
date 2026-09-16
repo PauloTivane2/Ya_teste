@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-/// Configuração central de tema da aplicação YA Corporate
-/// Baseado exclusivamente nas 5 cores oficiais da marca:
-/// BG (#FFFFFF), Accent Teal (#389C9A), Accent Amarelo (#FEDB71), Text (#1D1D1D), Secondary (#F8F8F8)
 class AppTheme {
   AppTheme._();
 
@@ -26,7 +23,6 @@ class AppTheme {
         onSurface: AppColors.textPrimary,
       ),
 
-      // AppBar
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.bg,
         surfaceTintColor: Colors.transparent,
@@ -42,7 +38,6 @@ class AppTheme {
         ),
       ),
 
-      // Cards
       cardTheme: CardThemeData(
         color: AppColors.cardBackground,
         elevation: 0,
@@ -53,7 +48,6 @@ class AppTheme {
         ),
       ),
 
-      // Botões Elevados / Principais
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.accentTeal,
@@ -74,7 +68,6 @@ class AppTheme {
         ),
       ),
 
-      // Botões Contornados
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.textPrimary,
@@ -91,7 +84,6 @@ class AppTheme {
         ),
       ),
 
-      // Divisores
       dividerTheme: const DividerThemeData(
         color: AppColors.border,
         thickness: 1,

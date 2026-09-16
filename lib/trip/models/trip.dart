@@ -1,6 +1,5 @@
 import '../../core/constants/trip_status.dart';
 
-/// Modelo de dados representativo de uma Viagem (Trip)
 class Trip {
   final String id;
   final String passenger;
@@ -28,7 +27,6 @@ class Trip {
     required this.createdAt,
   });
 
-  /// Cria uma nova instância de Trip com valores atualizados
   Trip copyWith({
     String? id,
     String? passenger,
@@ -57,7 +55,6 @@ class Trip {
     );
   }
 
-  /// Dados de exemplo para inicialização conforme o desafio
   factory Trip.mockInitial() {
     return Trip(
       id: 'YA-1024',

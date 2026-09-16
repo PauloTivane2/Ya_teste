@@ -3,7 +3,6 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/constants/trip_status.dart';
 import '../../core/theme/app_colors.dart';
 
-/// Botão responsável por alterar o estado da viagem
 class StatusButton extends StatelessWidget {
   final TripStatus currentStatus;
   final ValueChanged<TripStatus> onStatusChanged;
@@ -21,7 +20,6 @@ class StatusButton extends StatelessWidget {
     final nextStatus = currentStatus.nextStatus;
     final isTerminal = currentStatus.isTerminal;
 
-    // Ícone correspondente à próxima ação
     IconData getActionIcon() {
       switch (currentStatus) {
         case TripStatus.searching:
@@ -36,7 +34,6 @@ class StatusButton extends StatelessWidget {
       }
     }
 
-    // Cores usando estritamente a paleta oficial (#FFFFFF, #389C9A, #FEDB71, #1D1D1D, #F8F8F8)
     Color getButtonBgColor() {
       switch (currentStatus) {
         case TripStatus.searching:
@@ -66,7 +63,6 @@ class StatusButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Botão Principal de Avanço de Estado
         FilledButton.icon(
           onPressed: () {
             onStatusChanged(nextStatus);
@@ -93,7 +89,6 @@ class StatusButton extends StatelessWidget {
 
         const SizedBox(height: 10),
 
-        // Opção de cancelar quando a viagem ainda está em andamento
         if (!isTerminal) ...[
           OutlinedButton.icon(
             onPressed: () {

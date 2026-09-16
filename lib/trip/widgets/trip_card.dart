@@ -4,9 +4,6 @@ import '../../core/constants/trip_status.dart';
 import '../../core/theme/app_colors.dart';
 import '../models/trip.dart';
 
-/// 1. Card de Estado (Destaque Principal no Topo)
-/// Apresenta badge/chip colorido no topo para feedback visual imediato sem ler texto,
-/// descrição do momento atual e stepper visual do progresso da viagem.
 class TripStatusCard extends StatelessWidget {
   final Trip trip;
 
@@ -40,34 +37,28 @@ class TripStatusCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Topo com Identificador e Badge Colorida em Destaque
           Padding(
             padding: const EdgeInsets.fromLTRB(18, 16, 18, 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.secondary,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.border, width: 1),
-                      ),
-                      child: Text(
-                        trip.id,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.textPrimary,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.secondary,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.border, width: 1),
+                  ),
+                  child: Text(
+                    trip.id,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.textPrimary,
+                      letterSpacing: 0.5,
                     ),
-                  ],
+                  ),
                 ),
-                // Badge/Chip colorida em destaque visual imediato
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 250),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -103,10 +94,7 @@ class TripStatusCard extends StatelessWidget {
               ],
             ),
           ),
-
           const Divider(height: 1, color: AppColors.border),
-
-          // Informação e Descrição Contextual do Estado
           Padding(
             padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
             child: Row(
@@ -153,8 +141,6 @@ class TripStatusCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // Stepper de Progresso Visual da Viagem
           Padding(
             padding: const EdgeInsets.fromLTRB(18, 0, 18, 16),
             child: _buildProgressTimeline(status),
@@ -247,8 +233,6 @@ class TripStatusCard extends StatelessWidget {
   }
 }
 
-/// 2. Card de Trajeto (Partida → Destino)
-/// Layout tipo timeline vertical: ponto verde para partida, linha tracejada, ponto vermelho para destino.
 class TripRouteCard extends StatelessWidget {
   final Trip trip;
 
@@ -276,7 +260,6 @@ class TripRouteCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Título da Seção
           const Padding(
             padding: EdgeInsets.fromLTRB(18, 16, 18, 12),
             child: Row(
@@ -295,21 +278,16 @@ class TripRouteCard extends StatelessWidget {
               ],
             ),
           ),
-
           const Divider(height: 1, color: AppColors.border),
-
-          // Timeline Vertical de Origem e Destino
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Coluna Visual dos Indicadores da Linha do Tempo
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Column(
                     children: [
-                      // Ponto de Partida Verde
                       Container(
                         width: 14,
                         height: 14,
@@ -326,9 +304,7 @@ class TripRouteCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Linha Vertical Tracejada
                       const _DashedVerticalLine(height: 38, color: AppColors.border),
-                      // Ponto de Destino Vermelho
                       Container(
                         width: 14,
                         height: 14,
@@ -348,15 +324,11 @@ class TripRouteCard extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const SizedBox(width: 14),
-
-                // Coluna com os Endereços de Partida e Chegada
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Partida
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -381,10 +353,7 @@ class TripRouteCard extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 22),
-
-                      // Destino
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -415,8 +384,6 @@ class TripRouteCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // Faixa Inferior com Métricas (Distância, Tempo, Tarifa em MZN)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
             decoration: const BoxDecoration(
@@ -450,8 +417,6 @@ class TripRouteCard extends StatelessWidget {
   }
 }
 
-/// 3. Card do Motorista & Veículo
-/// Nome do motorista + veículo + matrícula agrupados
 class TripDriverCard extends StatelessWidget {
   final Trip trip;
 
@@ -480,7 +445,6 @@ class TripDriverCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Avatar do Carro / Motorista
           Container(
             width: 48,
             height: 48,
@@ -560,8 +524,6 @@ class TripDriverCard extends StatelessWidget {
   }
 }
 
-/// 4. Card do Passageiro
-/// Apresenta o nome do passageiro de forma limpa e contextual
 class TripPassengerCard extends StatelessWidget {
   final Trip trip;
 
@@ -590,7 +552,6 @@ class TripPassengerCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Avatar do Passageiro
           Container(
             width: 48,
             height: 48,
@@ -659,7 +620,6 @@ class TripPassengerCard extends StatelessWidget {
   }
 }
 
-/// Linha tracejada vertical para o card de trajeto
 class _DashedVerticalLine extends StatelessWidget {
   final double height;
   final Color color;
@@ -695,7 +655,6 @@ class _DashedVerticalLine extends StatelessWidget {
   }
 }
 
-/// Item de métrica compacto
 class _InfoPill extends StatelessWidget {
   final IconData icon;
   final String label;

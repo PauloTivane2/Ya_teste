@@ -6,15 +6,6 @@ import '../models/trip.dart';
 import '../widgets/status_button.dart';
 import '../widgets/trip_card.dart';
 
-/// Tela principal de acompanhamento e gestão da viagem
-/// Estruturada estritamente conforme a arquitetura de UX para apps de transporte:
-/// 1. Header/AppBar com logo YA e título "Detalhes da Viagem"
-/// 2. Card de Estado (Destaque Principal com badge/chip colorida no topo)
-/// 3. Card de Trajeto (Timeline vertical: partida verde → linha tracejada → destino vermelho)
-/// 4. Card do Motorista & Veículo (Nome + Carro + Matrícula agrupados)
-/// 5. Card do Passageiro (Nome do passageiro)
-/// 6. Simulador Rápido de Estados (para facilitar a avaliação interativa)
-/// 7. Botão de Ação fixo no fundo (Full-width, com texto dinâmico da próxima ação)
 class TripScreen extends StatefulWidget {
   const TripScreen({super.key});
 
@@ -41,8 +32,6 @@ class _TripScreenState extends State<TripScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondary,
-
-      // 1. Header/AppBar com logo YA e título "Detalhes da Viagem"
       appBar: AppBar(
         titleSpacing: 20,
         title: Row(
@@ -88,56 +77,38 @@ class _TripScreenState extends State<TripScreen> {
           const SizedBox(width: 8),
         ],
       ),
-
-      // Corpo da tela rolável e responsivo (SafeArea + SingleChildScrollView + Padding consistente de 20px)
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 2. Card de Estado (Destaque Principal com badge colorida no topo e stepper)
               TripStatusCard(trip: _trip),
-
               const SizedBox(height: 16),
-
-              // 3. Card de Trajeto (Timeline vertical: ponto verde partida, linha tracejada, ponto vermelho destino)
               TripRouteCard(trip: _trip),
-
               const SizedBox(height: 16),
-
-              // 4. Card do Motorista & Veículo (Nome + Carro + Matrícula)
               TripDriverCard(trip: _trip),
-
               const SizedBox(height: 16),
-
-              // 5. Card do Passageiro (Nome do passageiro Carlos)
               TripPassengerCard(trip: _trip),
-
               const SizedBox(height: 20),
-
-              // 6. Simulador Rápido de Estados (Atalho para o avaliador testar qualquer estado diretamente)
               _buildQuickStatusSelector(),
-
               const SizedBox(height: 12),
             ],
           ),
         ),
       ),
-
-      // 7. Botão de Ação fixo no fundo da tela (Full-width, com texto dinâmico da próxima ação)
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.bg,
-          border: const Border(
+          border: Border(
             top: BorderSide(color: AppColors.border, width: 1.0),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Color(0x0A000000),
               blurRadius: 10,
-              offset: const Offset(0, -4),
+              offset: Offset(0, -4),
             ),
           ],
         ),
@@ -156,7 +127,6 @@ class _TripScreenState extends State<TripScreen> {
     );
   }
 
-  /// Simulador em chips para saltar e testar qualquer estado diretamente
   Widget _buildQuickStatusSelector() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

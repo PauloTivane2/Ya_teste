@@ -1,21 +1,10 @@
-/// Enum que representa todos os estados possíveis do ciclo de vida de uma viagem.
 enum TripStatus {
-  /// O passageiro solicitou a viagem e o sistema procura um motorista disponível.
   searching,
-
-  /// O motorista aceitou a solicitação e está a deslocar-se para o ponto de recolha.
   driverAssigned,
-
-  /// O passageiro embarcou e a viagem encontra-se a caminho do destino.
   inProgress,
-
-  /// A viagem foi concluída com sucesso no destino final.
   completed,
-
-  /// A viagem foi cancelada pelo passageiro ou pelo motorista.
   cancelled;
 
-  /// Rótulo legível para exibição nas interfaces
   String get label {
     switch (this) {
       case TripStatus.searching:
@@ -31,7 +20,6 @@ enum TripStatus {
     }
   }
 
-  /// Descrição contextual do estado
   String get description {
     switch (this) {
       case TripStatus.searching:
@@ -47,7 +35,6 @@ enum TripStatus {
     }
   }
 
-  /// Texto de ação para o botão de transição de estado
   String get nextActionLabel {
     switch (this) {
       case TripStatus.searching:
@@ -62,7 +49,6 @@ enum TripStatus {
     }
   }
 
-  /// Próximo estado no ciclo de vida padrão da viagem
   TripStatus get nextStatus {
     switch (this) {
       case TripStatus.searching:
@@ -77,6 +63,5 @@ enum TripStatus {
     }
   }
 
-  /// Verifica se o estado é final
   bool get isTerminal => this == TripStatus.completed || this == TripStatus.cancelled;
 }

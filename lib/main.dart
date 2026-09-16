@@ -7,7 +7,6 @@ void main() {
   runApp(const YaTripApp());
 }
 
-/// Aplicação principal YA Trip Challenge
 class YaTripApp extends StatelessWidget {
   const YaTripApp({super.key});
 
