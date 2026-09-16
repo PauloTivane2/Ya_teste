@@ -1,0 +1,117 @@
+name: Build & Release YA Trip Challenge APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Tipo de build (release ou debug)'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
+
+permissions:
+  contents: write
+
+jobs:
+  build-android-apk:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar o repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configurar o Java 17 (compatível com Gradle / AGP do projeto)
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # 3. Configurar o ambiente Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+
+      # 4. Verificar versões das ferramentas
+      - name: Flutter Doctor
+        run: flutter doctor -v
+
+      # 5. Instalar dependências do projeto
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 6. Validação estática de código (Linter / Analyzer)
+      - name: Analyze code
+        run: flutter analyze
+
+      # 7. Execução dos testes unitários e de widgets
+      - name: Run tests
+        run: flutter test
+
+      # 8. Compilar o APK (Release ou Debug conforme gatilho)
+      - name: Build APK
+        run: |
+          BUILD_TYPE="${{ github.event.inputs.build_type || 'release' }}"
+          echo "Compilando APK no modo: $BUILD_TYPE"
+          if [ "$BUILD_TYPE" = "debug" ]; then
+            flutter build apk --debug
+          else
+            flutter build apk --release
+          fi
+
+      # 9. Preparar e renomear os artefatos com o nome oficial do projeto
+      - name: Organize APK Artifacts
+        run: |
+          mkdir -p output-apks
+          BUILD_TYPE="${{ github.event.inputs.build_type || 'release' }}"
+          if [ "$BUILD_TYPE" = "debug" ]; then
+            cp build/app/outputs/flutter-apk/app-debug.apk output-apks/ya_trip_challenge-debug.apk
+          else
+            cp build/app/outputs/flutter-apk/app-release.apk output-apks/ya_trip_challenge-release.apk
+          fi
+
+      # 10. Publicar o APK como artefato do GitHub Actions (Download no menu Actions)
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ya_trip_challenge-apk
+          path: output-apks/*.apk
+          retention-days: 14
+
+      # 11. Criar Release automática no GitHub quando uma tag for criada (ex: v1.0.0)
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output-apks/*.apk
+          name: YA Trip Challenge Release ${{ github.ref_name }}
+          body: |
+            ## YA Trip Challenge - Release ${{ github.ref_name }}
+            
+            Artefato APK compilado automaticamente pelo GitHub Actions CI/CD.
+            
+            - **Aplicação:** YA Trip Challenge
+            - **Package:** `com.tivane.ya_trip_challenge`
+            - **Commit:** `${{ github.sha }}`
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

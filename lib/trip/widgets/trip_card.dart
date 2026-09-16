@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/trip_status.dart';
 import '../../core/theme/app_colors.dart';
 import '../models/trip.dart';
 
@@ -36,7 +35,7 @@ class TripCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: Column(
-          crossAxisAlignment: CrossCrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Cabeçalho do Card: Identificador e Badge do Estado
             Padding(
@@ -61,7 +60,7 @@ class TripCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Column(
-                        crossAxisAlignment: CrossCrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             'VIAGEM CORPORATIVA',
@@ -129,7 +128,7 @@ class TripCard extends StatelessWidget {
                 children: [
                   // Ponto de Partida (Origem)
                   Row(
-                    crossAxisAlignment: CrossCrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
@@ -155,7 +154,7 @@ class TripCard extends StatelessWidget {
                       const SizedBox(width: 14),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossCrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
                               'Ponto de Partida',
@@ -182,7 +181,7 @@ class TripCard extends StatelessWidget {
 
                   // Ponto de Chegada (Destino)
                   Row(
-                    crossAxisAlignment: CrossCrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
@@ -199,7 +198,7 @@ class TripCard extends StatelessWidget {
                       const SizedBox(width: 14),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossCrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
                               'Destino',
@@ -265,6 +264,7 @@ class TripCard extends StatelessWidget {
                     avatarFgColor: AppColors.textPrimary,
                     title: 'Passageiro',
                     subtitle: trip.passenger,
+                    badgeText: 'Corporativo',
                   ),
 
                   const SizedBox(height: 14),
@@ -279,6 +279,7 @@ class TripCard extends StatelessWidget {
                     title: 'Motorista & Veículo',
                     subtitle: trip.driver,
                     secondarySubtitle: trip.vehicle,
+                    badgeText: 'Verificado',
                   ),
                 ],
               ),
@@ -308,7 +309,7 @@ class _InfoItem extends StatelessWidget {
         Icon(icon, size: 16, color: AppColors.textSecondary),
         const SizedBox(width: 6),
         Column(
-          crossAxisAlignment: CrossCrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               label,
@@ -355,7 +356,7 @@ class _DetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossCrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: 40,
@@ -370,7 +371,7 @@ class _DetailRow extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossCrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [

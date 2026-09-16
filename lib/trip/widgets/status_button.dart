@@ -63,7 +63,7 @@ class StatusButton extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossCrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Botão Principal de Avanço de Estado
         FilledButton.icon(

@@ -96,7 +96,7 @@ class _TripScreenState extends State<TripScreen> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(
-            crossAxisAlignment: CrossCrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Barra de Progresso / Stepper Visual do Ciclo da Viagem
               _buildProgressTimeline(_trip.status),
@@ -235,7 +235,7 @@ class _TripScreenState extends State<TripScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossCrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   status.label,
@@ -264,7 +264,7 @@ class _TripScreenState extends State<TripScreen> {
   /// Seletor em chips para saltar e testar qualquer estado diretamente
   Widget _buildQuickStatusSelector() {
     return Column(
-      crossAxisAlignment: CrossCrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           'Simulador de Estado (Teste Rápido)',
